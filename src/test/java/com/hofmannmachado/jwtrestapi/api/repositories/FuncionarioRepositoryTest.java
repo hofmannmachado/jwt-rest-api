@@ -13,8 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.security.NoSuchAlgorithmException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -28,6 +27,7 @@ public class FuncionarioRepositoryTest {
 
 	private static final String EMAIL = "email@email.com";
 	private static final String CPF = "24291173474";
+	private static final Long ID = 1L;
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -75,8 +75,20 @@ public class FuncionarioRepositoryTest {
 		assertNotNull(funcionario);
 	}
 
+	@Test
+	public void testExcluirFuncionario() {
+		Funcionario funcionario = this.funcionarioRepository.findByCpf(CPF);
+
+		this.funcionarioRepository.deleteById(funcionario.getId());
+
+		funcionario = this.funcionarioRepository.findByCpf(CPF);
+
+		assertNull(funcionario);
+	}
+
 	private Funcionario obterDadosFuncionario(Empresa empresa) throws NoSuchAlgorithmException {
 		Funcionario funcionario = new Funcionario();
+		funcionario.setId(ID);
 		funcionario.setNome("Fulano de Tal");
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
 		funcionario.setSenha(PasswordUtils.gerarBCrypt("123456"));

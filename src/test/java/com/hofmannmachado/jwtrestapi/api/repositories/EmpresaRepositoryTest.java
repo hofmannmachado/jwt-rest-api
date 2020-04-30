@@ -1,6 +1,7 @@
 package com.hofmannmachado.jwtrestapi.api.repositories;
 
 import com.hofmannmachado.jwtrestapi.api.entities.Empresa;
+import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -18,6 +19,7 @@ public class EmpresaRepositoryTest {
 	private EmpresaRepository empresaRepository;
 	
 	private static final String CNPJ = "51463645000100";
+	private static final Long ID = 1L;
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -37,6 +39,16 @@ public class EmpresaRepositoryTest {
 		Empresa empresa = this.empresaRepository.findByCnpj(CNPJ);
 		
 		assertEquals(CNPJ, empresa.getCnpj());
+	}
+
+	@Test
+	public void testExcluirEmpresa() {
+		Empresa empresa = this.empresaRepository.findByCnpj(CNPJ);
+		this.empresaRepository.deleteById(empresa.getId());
+
+		empresa = this.empresaRepository.findByCnpj(CNPJ);
+
+		assertNull(empresa);
 	}
 
 }
