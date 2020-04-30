@@ -1,4 +1,4 @@
-package com.hofmannmachado.jwtrestapi.utils;
+package com.hofmannmachado.jwtrestapi.api.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

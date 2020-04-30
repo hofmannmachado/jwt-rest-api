@@ -1,4 +1,4 @@
-package com.hofmannmachado.jwtrestapi.entities;
+package com.hofmannmachado.jwtrestapi.api.entities;
 
 import java.io.Serializable;
 import java.util.Date;

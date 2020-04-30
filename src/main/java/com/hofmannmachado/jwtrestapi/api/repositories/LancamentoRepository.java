@@ -1,4 +1,4 @@
-package com.hofmannmachado.jwtrestapi.repositories;
+package com.hofmannmachado.jwtrestapi.api.repositories;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hofmannmachado.jwtrestapi.entities.Lancamento;
+import com.hofmannmachado.jwtrestapi.api.entities.Lancamento;
 
 @Transactional(readOnly = true)
 @NamedQueries({

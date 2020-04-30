@@ -1,6 +1,6 @@
-package com.hofmannmachado.jwtrestapi.repositories;
+package com.hofmannmachado.jwtrestapi.api.repositories;
 
-import com.hofmannmachado.jwtrestapi.entities.Funcionario;
+import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

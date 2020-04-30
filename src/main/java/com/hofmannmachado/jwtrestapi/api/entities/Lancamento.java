@@ -1,6 +1,6 @@
-package com.hofmannmachado.jwtrestapi.entities;
+package com.hofmannmachado.jwtrestapi.api.entities;
 
-import com.hofmannmachado.jwtrestapi.enums.TipoEnum;
+import com.hofmannmachado.jwtrestapi.api.enums.TipoEnum;
 
 import java.io.Serializable;
 import java.util.Date;

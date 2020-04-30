@@ -1,6 +1,6 @@
-package com.hofmannmachado.jwtrestapi.entities;
+package com.hofmannmachado.jwtrestapi.api.entities;
 
-import com.hofmannmachado.jwtrestapi.enums.PerfilEnum;
+import com.hofmannmachado.jwtrestapi.api.enums.PerfilEnum;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

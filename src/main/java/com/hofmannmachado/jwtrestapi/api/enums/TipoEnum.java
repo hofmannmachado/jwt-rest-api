@@ -1,4 +1,4 @@
-package com.hofmannmachado.jwtrestapi.enums;
+package com.hofmannmachado.jwtrestapi.api.enums;
 
 public enum TipoEnum {
 	INICIO_TRABALHO,
