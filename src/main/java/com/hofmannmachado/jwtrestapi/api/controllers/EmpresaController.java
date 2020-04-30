@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/empresas")
-@CrossOrigin(origins = "*")
+@RequestMapping("${app.api.empresas.url}")
+@CrossOrigin(origins = {"${settings.cors_origin}"})
 public class EmpresaController {
 
     private static final Logger log = LoggerFactory.getLogger(EmpresaController.class);
@@ -43,7 +43,7 @@ public class EmpresaController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        response.setData(this.converterEmpresaDto(empresa.get()));
+        response.setData(converterEmpresaDto(empresa.get()));
         return ResponseEntity.ok(response);
     }
 

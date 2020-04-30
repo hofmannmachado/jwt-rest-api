@@ -22,8 +22,8 @@ import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-@RequestMapping("/api/cadastrar-pj")
-@CrossOrigin(origins =  {"${settings.cors_origin}"})
+@RequestMapping("${app.api.cadastrar-pj.url}")
+@CrossOrigin(origins = {"${settings.cors_origin}"})
 public class CadastroPJController {
 
     private static final Logger log = LoggerFactory.getLogger(CadastroPJController.class);
