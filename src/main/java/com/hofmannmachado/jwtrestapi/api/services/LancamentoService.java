@@ -1,11 +1,11 @@
 package com.hofmannmachado.jwtrestapi.api.services;
 
+import java.util.Optional;
 
-import com.hofmannmachado.jwtrestapi.api.entities.Lancamento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.Optional;
+import com.hofmannmachado.jwtrestapi.api.entities.Lancamento;
 
 public interface LancamentoService {
 

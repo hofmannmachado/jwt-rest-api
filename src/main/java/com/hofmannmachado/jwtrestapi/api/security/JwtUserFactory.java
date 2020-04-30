@@ -3,11 +3,11 @@ package com.hofmannmachado.jwtrestapi.api.security;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
-import com.hofmannmachado.jwtrestapi.api.enums.PerfilEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
+import com.hofmannmachado.jwtrestapi.api.enums.PerfilEnum;
 
 public class JwtUserFactory {
 

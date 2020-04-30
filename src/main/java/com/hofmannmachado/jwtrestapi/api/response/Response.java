@@ -7,6 +7,7 @@ public class Response<T> {
 
     private T data;
     private List<String> errors;
+    private String message;
 
     public Response() {
     }
@@ -30,4 +31,11 @@ public class Response<T> {
         this.errors = errors;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

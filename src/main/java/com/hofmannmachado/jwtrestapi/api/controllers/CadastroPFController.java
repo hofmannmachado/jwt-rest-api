@@ -1,4 +1,21 @@
 package com.hofmannmachado.jwtrestapi.api.controllers;
+import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hofmannmachado.jwtrestapi.api.dtos.CadastroPFDto;
 import com.hofmannmachado.jwtrestapi.api.entities.Empresa;
@@ -8,18 +25,7 @@ import com.hofmannmachado.jwtrestapi.api.response.Response;
 import com.hofmannmachado.jwtrestapi.api.services.EmpresaService;
 import com.hofmannmachado.jwtrestapi.api.services.FuncionarioService;
 import com.hofmannmachado.jwtrestapi.api.utils.PasswordUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("${app.api.cadastrar-pf.url}")
@@ -56,7 +62,7 @@ public class CadastroPFController {
         Funcionario funcionario = converterDtoParaFuncionario(cadastroPFDto, result);
 
         if (result.hasErrors()) {
-            log.error("Erro validando dados de cadastro de PF: {}", result.getAllErrors());
+            log.error("Erro validando dados de cadastro PF: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }

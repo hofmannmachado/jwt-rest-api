@@ -1,8 +1,8 @@
 package com.hofmannmachado.jwtrestapi.api.services;
 
-import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
-
 import java.util.Optional;
+
+import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
 
 public interface FuncionarioService {
 

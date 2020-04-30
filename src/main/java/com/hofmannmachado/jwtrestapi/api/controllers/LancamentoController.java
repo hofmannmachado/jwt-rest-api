@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -17,18 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import com.hofmannmachado.jwtrestapi.api.dtos.LancamentoDto;
@@ -38,6 +32,8 @@ import com.hofmannmachado.jwtrestapi.api.enums.TipoEnum;
 import com.hofmannmachado.jwtrestapi.api.response.Response;
 import com.hofmannmachado.jwtrestapi.api.services.FuncionarioService;
 import com.hofmannmachado.jwtrestapi.api.services.LancamentoService;
+
+import static com.hofmannmachado.jwtrestapi.api.enums.PerfilEnum.ROLE_ADMIN;
 
 @RestController
 @RequestMapping("${app.api.lancamentos.url}")
@@ -89,8 +85,9 @@ public class LancamentoController {
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 */
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Response<LancamentoDto>> listarPorId(@PathVariable("id") Long id) {
+	public ResponseEntity<Response<LancamentoDto>> listarPorId(@PathVariable("id") Long id, HttpServletRequest request) {
 		log.info("Buscando lançamento por ID: {}", id);
+
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
 		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorId(id);
 
@@ -100,6 +97,15 @@ public class LancamentoController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
+
+		Funcionario funcionario = funcionarioService.buscarPorEmail(request.getRemoteUser()).get();
+		if(funcionario.getId() != lancamento.get().getFuncionario().getId() && !request.isUserInRole("ADMIN")) {
+			log.info("Lançamento pertence a outro usuario.");
+			response.getErrors().add("Unauthorized");
+			response.setMessage("Wrong user");
+			return ResponseEntity.status(401).body(response);
+		}
+
 		response.setData(this.converterLancamentoDto(lancamento.get()));
 		return ResponseEntity.ok(response);
 	}
@@ -107,7 +113,7 @@ public class LancamentoController {
 	/**
 	 * Adiciona um novo lançamento.
 	 * 
-	 * @param lancamento
+	 * @param lancamentoDto
 	 * @param result
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 * @throws ParseException 

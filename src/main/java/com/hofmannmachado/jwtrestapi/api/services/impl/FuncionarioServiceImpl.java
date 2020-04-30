@@ -1,14 +1,15 @@
 package com.hofmannmachado.jwtrestapi.api.services.impl;
 
-import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
-import com.hofmannmachado.jwtrestapi.api.repositories.FuncionarioRepository;
-import com.hofmannmachado.jwtrestapi.api.services.FuncionarioService;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.hofmannmachado.jwtrestapi.api.entities.Funcionario;
+import com.hofmannmachado.jwtrestapi.api.repositories.FuncionarioRepository;
+import com.hofmannmachado.jwtrestapi.api.services.FuncionarioService;
 
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
